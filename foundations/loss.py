@@ -20,5 +20,5 @@ class Solution:
         epsilon = 1e-7
         y_pred = y_pred + epsilon
         n = y_true.shape[0]
-        loss = -np.sum(np.diagonal(y_true @ np.log(y_pred).T))/n
+        loss = -np.sum(y_true * np.log(y_pred))/n
         return round(loss, 4)
