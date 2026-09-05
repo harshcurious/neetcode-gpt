@@ -34,9 +34,7 @@ class Solution:
         weights = initial_weights
         for i in range(num_iterations):
             prediction = self.get_model_prediction(X, weights)
-            derivatives = np.zeros(M)
-            for j in range(M):
-                derivatives[j] = self.get_derivative(prediction, Y, N, X, j)
+            derivatives = 2 * (X.T @ (prediction - Y)) / N
             weights = weights - (self.learning_rate * derivatives)
         return np.round(weights, 5)
             
