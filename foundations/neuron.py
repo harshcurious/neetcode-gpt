@@ -22,8 +22,12 @@ class Solution:
         # return round(your_answer, 5)
         
         z = np.dot(x,w) + b
-        if activation == "sigmoid":
-            z = self._sigmoid(z)
-        else:
-            z = self._relu(z)
+        match activation:
+            case "sigmoid":
+                z = self._sigmoid(z)
+            case "relu":
+                z = self._relu(z)
+            case _:
+                print("invalid activation funtion")
+                pass
         return np.round(z, 5)
