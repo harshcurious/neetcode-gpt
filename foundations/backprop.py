@@ -19,9 +19,12 @@ class Solution:
         z = np.dot(x, w) + b
         y_hat = self._sigmoid(z)
 
-        loss = 0.5 * np.sum((y_hat - y_true)**2)
+        # Scalar gradient w.r.t pre-activation z: dL/dz = dL/dy_hat * dy_hat/dz
+        # Since y_hat and y_true are scalars, use standard Python floats to avoid NumPy overhead
+        delta = (y_hat - y_true) * y_hat * (1.0 - y_hat)
 
-        dL_dw = np.round(np.dot((y_hat - y_true), y_hat) * (1-y_hat) * x, 5)
-        dL_db = np.round(np.dot((y_hat - y_true), y_hat) * (1-y_hat), 5)
+        # Gradients
+        dL_dw = np.round(delta * x, 5)
+        dL_db = float(np.round(delta, 5))
         return (dL_dw, dL_db)
 
